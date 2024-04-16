@@ -10,13 +10,10 @@ fi
 
 failed=false
 
-for file in "$@"; do
-    # redirect stderr so that violations and summaries are properly interleaved.
-    if ! staticcheck "$file" 2>&1
-    then
-        failed=true
-    fi
-done
+if ! staticcheck ./... 2>&1
+then
+  failed=true
+fi
 
 if [[ $failed == "true" ]]; then
     exit 1
